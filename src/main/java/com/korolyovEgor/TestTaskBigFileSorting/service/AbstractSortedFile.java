@@ -11,6 +11,9 @@ public abstract class AbstractSortedFile implements SortedFile {
     @Value("${sortedService.file}")
     protected String file;
 
+    @Value("${sortedService.sorted-file}")
+    protected String sortedFile;
+
     public abstract void sort();
 
     @Override
@@ -27,9 +30,9 @@ public abstract class AbstractSortedFile implements SortedFile {
             }
 
             boolean flag = true;
-            System.out.println(line);
+            System.out.println('|' + line + '|');
             while ((line = raf.readLine()) != null) {
-                System.out.println(line);
+                System.out.println('|' + line + '|');
                 if (linePrev.compareTo(line) > 0) {
                     flag = false;
 //                    return false;
