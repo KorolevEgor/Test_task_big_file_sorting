@@ -1,4 +1,4 @@
-package com.korolyovEgor.TestTaskBigFileSorting.fileGeneratorService.aspect;
+package com.korolyovEgor.TestTaskBigFileSorting.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
