@@ -19,11 +19,9 @@ public class SortedFileMerge extends AbstractSortedFile {
 
     private long filesCount;
 
-    @Value("${sortedService.lines-count-in-one-file}")
+    @Value("${fileGenerationService.lines-count}")
     private int linesCount;
 
-    @Value("${sortedService.max-line-length}")
-    private int maxLength;
 
 //    @PostConstruct
 //    public void postConstructMethod() {

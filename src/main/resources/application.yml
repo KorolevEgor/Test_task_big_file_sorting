@@ -1,5 +1,9 @@
 sortedService:
-  file: "src/main/resources/unsorted.txt"
+  file: "src/main/resources/unsorted_1.txt"
   sorted-file: "src/main/resources/sorted.txt"
   lines-count-in-one-file: "3"
-  max-line-length: "1000"
+
+fileGenerationService:
+  file: "src/main/resources/unsorted_1.txt"
+  max-length-lines: "1000"
+  lines-count: "1000"
