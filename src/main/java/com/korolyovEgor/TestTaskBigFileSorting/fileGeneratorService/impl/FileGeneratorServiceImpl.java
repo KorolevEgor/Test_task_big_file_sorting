@@ -24,10 +24,10 @@ public class FileGeneratorServiceImpl implements FileGeneratorService {
     @Value("${fileGenerationService.lines-count}")
     private int linesCount;
 
-    @PostConstruct
-    private void postConstructMethod() {
-        generate();
-    }
+//    @PostConstruct
+//    private void postConstructMethod() {
+//        generate();
+//    }
 
     @Override
     public void generate() {

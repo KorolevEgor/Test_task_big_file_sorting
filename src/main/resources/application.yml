@@ -1,7 +1,7 @@
 sortedService:
   file: "src/main/resources/unsorted_1.txt"
   sorted-file: "src/main/resources/sorted.txt"
-  lines-count-in-one-file: "3"
+  lines-count-in-one-file: "100"
 
 fileGenerationService:
   file: "src/main/resources/unsorted_1.txt"
