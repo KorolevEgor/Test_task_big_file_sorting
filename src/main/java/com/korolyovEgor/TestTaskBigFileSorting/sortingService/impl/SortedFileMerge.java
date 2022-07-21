@@ -110,8 +110,8 @@ public class SortedFileMerge extends AbstractSortedFile {
         try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
             totalLinesCount = calcTotalLinesCount();
             filesCount = (long) Math.ceil(((double) totalLinesCount) / linesCount);
-            log.info("totalLinesCount: " + totalLinesCount);
-            log.info("filesCount: " + filesCount);
+//            log.info("totalLinesCount: " + totalLinesCount);
+//            log.info("filesCount: " + filesCount);
 
             String lineRead;
             for (int i = 0; i < filesCount; i++) {
