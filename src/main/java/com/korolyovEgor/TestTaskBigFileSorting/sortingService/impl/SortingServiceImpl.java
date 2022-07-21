@@ -1,8 +1,7 @@
-package com.korolyovEgor.TestTaskBigFileSorting.SortingService.impl;
+package com.korolyovEgor.TestTaskBigFileSorting.sortingService.impl;
 
-import com.korolyovEgor.TestTaskBigFileSorting.SortingService.AbstractSortedFile;
-import com.korolyovEgor.TestTaskBigFileSorting.SortingService.SortedFile;
-import com.korolyovEgor.TestTaskBigFileSorting.SortingService.SortedService;
+import com.korolyovEgor.TestTaskBigFileSorting.sortingService.SortedFile;
+import com.korolyovEgor.TestTaskBigFileSorting.sortingService.SortedService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
