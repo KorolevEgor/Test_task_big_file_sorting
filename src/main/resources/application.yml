@@ -3,4 +3,3 @@ sortedService:
   sorted-file: "src/main/resources/sorted.txt"
   lines-count-in-one-file: "3"
   max-line-length: "1000"
-

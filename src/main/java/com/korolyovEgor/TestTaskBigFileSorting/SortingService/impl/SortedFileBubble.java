@@ -1,31 +1,37 @@
-package com.korolyovEgor.TestTaskBigFileSorting.service.impl;
+package com.korolyovEgor.TestTaskBigFileSorting.SortingService.impl;
 
-import com.korolyovEgor.TestTaskBigFileSorting.service.AbstractSortedFile;
+import com.korolyovEgor.TestTaskBigFileSorting.SortingService.AbstractSortedFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 
 @Slf4j
 @Component
 public class SortedFileBubble extends AbstractSortedFile {
 
+//    @PostConstruct
+//    public void postConstructMethod() {
+//        sort();
+//    }
+
     private long swapNearbyLinesIfRequired(RandomAccessFile raf, long firstLineStartPosition) throws IOException {
         raf.seek(firstLineStartPosition);
         String firstLine = raf.readLine();
+        if ("".equals(firstLine))
+            firstLine = raf.readLine();
         String secondLine = raf.readLine();
+        long secondLineStartPosition = raf.getFilePointer();
 
-        System.out.println("firstLine: " + firstLine);
-        System.out.println("secondLine: " + secondLine);
+        System.out.println("firstLine: |" + firstLine + '|');
+        System.out.println("secondLine: |" + secondLine + '|');
 
         if (firstLine == null || secondLine == null) {
             return raf.getFilePointer();
         }
 
         if (firstLine.compareTo(secondLine) <= 0) {
-            firstLineStartPosition += firstLine.length() + 1;
-            raf.seek(firstLineStartPosition);
+            firstLineStartPosition = raf.getFilePointer() - secondLine.length() - 1;
             return firstLineStartPosition;
         }
 
@@ -38,7 +44,7 @@ public class SortedFileBubble extends AbstractSortedFile {
             raf.write(' ');
         }
         raf.write('\n');
-        long secondLineStartPosition = raf.getFilePointer();
+        secondLineStartPosition = raf.getFilePointer();
 
         raf.writeBytes(firstLine);
         // удаляем неиспользуемые символы
@@ -48,7 +54,6 @@ public class SortedFileBubble extends AbstractSortedFile {
         raf.write('\n');
 
         firstLineStartPosition = secondLineStartPosition;
-        raf.seek(firstLineStartPosition);
         return firstLineStartPosition;
     }
 
@@ -57,10 +62,11 @@ public class SortedFileBubble extends AbstractSortedFile {
         try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
             while (!isSorted()) {
                 raf.seek(0);
-                long positionLinePrev = 0L;
+                long linePrevPosition = 0L;
 
                 while (raf.readLine() != null) {
-                    positionLinePrev = swapNearbyLinesIfRequired(raf, positionLinePrev);
+                    linePrevPosition = swapNearbyLinesIfRequired(raf, linePrevPosition);
+                    raf.seek(linePrevPosition);
                 }
             }
         } catch (IOException e) {
@@ -68,21 +74,4 @@ public class SortedFileBubble extends AbstractSortedFile {
         }
     }
 
-    @PostConstruct
-    public void postConstructMethod() {
-        sort();
-    }
 }
-
-
-/*
-
-aaa
-ccc
-bbb
-ddd
-fff
-eee
-ggg
-
- */

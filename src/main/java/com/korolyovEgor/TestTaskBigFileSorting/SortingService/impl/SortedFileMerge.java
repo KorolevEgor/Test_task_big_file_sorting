@@ -1,19 +1,16 @@
-package com.korolyovEgor.TestTaskBigFileSorting.service.impl;
+package com.korolyovEgor.TestTaskBigFileSorting.SortingService.impl;
 
-import com.korolyovEgor.TestTaskBigFileSorting.service.AbstractSortedFile;
+import com.korolyovEgor.TestTaskBigFileSorting.SortingService.AbstractSortedFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Component
@@ -29,10 +26,10 @@ public class SortedFileMerge extends AbstractSortedFile {
     @Value("${sortedService.max-line-length}")
     private int maxLength;
 
-    @PostConstruct
-    public void postConstructMethod() {
-        sort();
-    }
+//    @PostConstruct
+//    public void postConstructMethod() {
+//        sort();
+//    }
 
     /*
         1. разделить файл на N файлов, в каждом из которых содержится равное количество строк, за исключением,
@@ -69,8 +66,8 @@ public class SortedFileMerge extends AbstractSortedFile {
             }
 
             List<String> linesFromRUFs = new ArrayList<>();
-            for (int i = 0; i < rafs.size(); i++) {
-                linesFromRUFs.add(rafs.get(i).readLine());
+            for (RandomAccessFile raf : rafs) {
+                linesFromRUFs.add(raf.readLine());
             }
 
             while (!linesFromRUFs.isEmpty()) {
