@@ -1,0 +1,5 @@
+sortedService:
+  file: "src/main/resources/unsorted.txt"
+  lines-count: 1000
+  max-line-length: 1000
+
