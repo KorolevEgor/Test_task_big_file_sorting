@@ -15,6 +15,8 @@ public class SortedFileBubble extends AbstractSortedFile {
 //        sort();
 //    }
 
+    // меняет местами последовательно расположенные строки, если вторая строка лексикографически больше первой
+    // первая строка имеет позицию firstLineStartPosition
     private long swapNearbyLinesIfRequired(RandomAccessFile raf, long firstLineStartPosition) throws IOException {
         raf.seek(firstLineStartPosition);
         String firstLine = raf.readLine();

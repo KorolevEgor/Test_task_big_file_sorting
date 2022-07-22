@@ -58,16 +58,19 @@ public class SortedFileMerge extends AbstractSortedFile {
                 RandomAccessFile rafSorted = new RandomAccessFile(sortedFile, "rw")
         ) {
             List<RandomAccessFile> rafs = new ArrayList<>();
+            // init random access files
             for (int i = 0; i < filesCount; i++) {
                 String filePath = tmpDir + (i+1) + ".txt";
                 rafs.add(new RandomAccessFile(filePath, "rw"));
             }
 
+            // хранит по i-у индексу значение текущей строки rafs[i]
             List<String> linesFromRUFs = new ArrayList<>();
             for (RandomAccessFile raf : rafs) {
                 linesFromRUFs.add(raf.readLine());
             }
 
+            // поиск минимального значения
             while (!linesFromRUFs.isEmpty()) {
                 String minValue = linesFromRUFs.get(0);
                 int indOfMin = 0;
@@ -78,9 +81,11 @@ public class SortedFileMerge extends AbstractSortedFile {
                     }
                 }
 
+                // запись в итоговый файл найденное минимальное значение и обновление строки в списках
                 rafSorted.writeBytes(minValue + '\n');
                 linesFromRUFs.set(indOfMin, rafs.get(indOfMin).readLine());
 
+                // при достижении указателя на конец файла соответствующие элементы из linesFromRUFs и rafs удаляются
                 for (int i = 0; i < linesFromRUFs.size(); i++) {
                     if (linesFromRUFs.get(i) == null) {
                         rafs.get(i).close();
