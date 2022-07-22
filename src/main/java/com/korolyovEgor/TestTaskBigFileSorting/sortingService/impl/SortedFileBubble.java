@@ -23,9 +23,6 @@ public class SortedFileBubble extends AbstractSortedFile {
         String secondLine = raf.readLine();
         long secondLineStartPosition = raf.getFilePointer();
 
-        System.out.println("firstLine: |" + firstLine + '|');
-        System.out.println("secondLine: |" + secondLine + '|');
-
         if (firstLine == null || secondLine == null) {
             return raf.getFilePointer();
         }

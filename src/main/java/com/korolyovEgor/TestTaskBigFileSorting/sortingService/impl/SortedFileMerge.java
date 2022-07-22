@@ -22,6 +22,7 @@ public class SortedFileMerge extends AbstractSortedFile {
     @Value("${fileGenerationService.lines-count}")
     private int linesCount;
 
+    private final String tmpDir = "src/main/resources/tmp/";
 
 //    @PostConstruct
 //    public void postConstructMethod() {
@@ -46,7 +47,7 @@ public class SortedFileMerge extends AbstractSortedFile {
 
     private void removeTmpFiles() {
         for (int i = 0; i < filesCount; i++) {
-            String filePath = "src/main/resources/tmp/" + (i+1) + ".txt";
+            String filePath = tmpDir + (i+1) + ".txt";
             File tmpFile = new File(filePath);
             tmpFile.delete();
         }
@@ -58,7 +59,7 @@ public class SortedFileMerge extends AbstractSortedFile {
         ) {
             List<RandomAccessFile> rafs = new ArrayList<>();
             for (int i = 0; i < filesCount; i++) {
-                String filePath = "src/main/resources/tmp/" + (i+1) + ".txt";
+                String filePath = tmpDir + (i+1) + ".txt";
                 rafs.add(new RandomAccessFile(filePath, "rw"));
             }
 
@@ -110,8 +111,6 @@ public class SortedFileMerge extends AbstractSortedFile {
         try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
             totalLinesCount = calcTotalLinesCount();
             filesCount = (long) Math.ceil(((double) totalLinesCount) / linesCount);
-//            log.info("totalLinesCount: " + totalLinesCount);
-//            log.info("filesCount: " + filesCount);
 
             String lineRead;
             for (int i = 0; i < filesCount; i++) {
@@ -122,7 +121,7 @@ public class SortedFileMerge extends AbstractSortedFile {
                 }
                 subFileStorage.sort(String::compareTo);
 
-                String filePath = "src/main/resources/tmp/" + (i+1) + ".txt";
+                String filePath = tmpDir + (i+1) + ".txt";
                 File tmpFile = new File(filePath);
                 if (!tmpFile.createNewFile()) {
                     log.error("файл " + tmpFile.getPath() + tmpFile.getName() + " не удалось создать");
